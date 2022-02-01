@@ -1,0 +1,26 @@
+model_seed: 0
+dataset_seed: 0
+device: "cuda"
+run_num: 0
+
+sweep_config_file: "sweep_config.yaml"
+project_name: "my-test-net"
+experiment_tag: "test_sweep_1"
+sweep: True
+sweep_id: null
+sweep_num_runs: 50
+
+dataset_size: 1000
+dataset_dimension: 10
+
+batch_size: 1000
+epochs: 1000
+history: 100
+learning_rate: 0.001
+
+model_type: mlp
+model_layers: 8
+model_filters: 32
+model_norm: null
+model_dropout: 0.1
+model_activation: gelu

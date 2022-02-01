@@ -1,0 +1,21 @@
+method: "bayes"
+metric:
+        name: "Best Test"
+        goal: "minimize"
+parameters:
+        model_type:
+                values: ['mlp', 'transformer']
+        model_layers:
+                distribution: "int_uniform"
+                min: 1
+                max: 32
+        model_filters:
+                distribution: "int_uniform"
+                min: 16
+                max: 256
+        model_dropout:
+                distribution: "uniform"
+                min: 0
+                max: 0.5
+        model_norm:
+                values: [null, 'layer', 'batch']
