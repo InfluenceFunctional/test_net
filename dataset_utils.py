@@ -2,13 +2,22 @@ import numpy as np
 from torch.utils.data import DataLoader
 from sklearn.utils import shuffle
 import tqdm
+from utils import standardize
 
 class build_dataset():
     def __init__(self,config):
         self.config = config
-        self.data = self.generate_data()
-        self.data_dimensions = self.get_dimension(self.data)
+        if config.data_source == 'synthetic':
+            self.data = self.generate_data()
+        elif config.data_source == 'gaussian_1':
+            data = np.genfromtxt('data/pot.dat', delimiter=',')
+            self.data = {
+                'samples':data[:,0:2],
+                'values':data[:,2],
+            }
+            self.data['values'] = standardize(self.data['values'])
 
+        self.data_dimensions = self.get_dimension(self.data)
 
     def generate_data(self):
         np.random.seed(self.config.dataset_seed)

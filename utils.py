@@ -7,7 +7,7 @@ def check_convergence(config, record):
     converged = False
 
     if len(record) > config.history:
-        if all(record[-config.history:] > record[-(config.history - 1)]):
+        if all(record[-config.history:] > np.amin(record)):
             converged = True
             print("Model converged, test loss increasing")
 
@@ -65,3 +65,6 @@ def load_yaml(path):
         target_dict = yaml.safe_load(f)
 
     return target_dict
+
+def standardize(y):
+    return (y - np.average(y)) / np.sqrt(np.var(y))

@@ -1,6 +1,6 @@
 import wandb
 from dataset_utils import build_dataset, build_dataloaders
-from model_utils import get_model, model_epoch
+from model_utils import get_model, model_epoch, save_model
 import torch.optim as optim
 import torch
 import time
@@ -53,14 +53,18 @@ class main_container:
                 best_test = np.amin(test_loss_record)
                 scheduler1.step(best_test)
 
-                wandb.log(
-                    {"Train Loss": train_loss_record[-1],
-                     "Test Loss": test_loss_record[-1],
-                     "Best Test": best_test,
-                     "Epoch": epoch}
-                )
+                if test_loss_record[-1] == best_test:
+                    save_model(model, optimizer)
 
-                if check_convergence(config, test_loss_record) and (epoch > config.history + 2):
+                if config.wandb:
+                    wandb.log(
+                        {"Train Loss": train_loss_record[-1],
+                         "Test Loss": test_loss_record[-1],
+                         "Best Test": best_test,
+                         "Epoch": epoch}
+                    )
+
+                if check_convergence(config, test_loss_record) and (epoch > (config.history + 2)):
                     break
 
                 print('epoch={}; nll_tr={:.5f}; nll_te={:.5f}; time_tr={:.1f}s; time_te={:.1f}s'.format(epoch, torch.mean(torch.stack(err_tr)), torch.mean(torch.stack(err_te)), time_train, time_test))

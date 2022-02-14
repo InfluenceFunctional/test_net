@@ -10,11 +10,14 @@ def get_args(parser):
     arg_list = [
         {'name': 'config_file', 'type': str, 'default': 'default_config.yaml'},
 
+        {'name': 'data_source', 'type': str, 'default': 'gaussian_1'}, # 'synthetic', 'gaussian_1'
         {'name': 'run_num', 'type': int, 'default': 0},
         {'name': 'dataset_seed', 'type': int, 'default': 0},
         {'name': 'model_seed', 'type': int, 'default': 0},
-        {'name': 'device', 'type': str, 'default': 'cuda'},
+        {'name': 'device', 'type': str, 'default': 'cpu'}, # 'cuda' 'cpu'
 
+        # wandb logging / sweeping info
+        {'name': 'wandb', 'type': bool, 'default': True}, # log to wandb
         {'name': 'sweep', 'type': bool, 'default': False},
         {'name': 'sweep_config_file', 'type': str, 'default': 'sweep_config.yaml'},
         {'name': 'sweep_id', 'type': str, 'default': None},
@@ -22,20 +25,23 @@ def get_args(parser):
         {'name': 'experiment_tag', 'type': str, 'default': 'dev_test_2'},
         {'name': 'project_name', 'type': str, 'default': 'my-test-net'},
 
+        # dataset information for synthetic data generation
         {'name': 'dataset_size', 'type': int, 'default': 10000},
         {'name': 'dataset_dimension', 'type': int, 'default': 5},
 
-        {'name': 'batch_size', 'type': int, 'default': 1000},
+        # training details
+        {'name': 'batch_size', 'type': int, 'default': 10},
         {'name': 'epochs', 'type': int, 'default': 10000},
         {'name': 'history', 'type': int, 'default': 100},
         {'name': 'learning_rate', 'type': float, 'default': 1e-3},
 
+        # model details
         {'name': 'model_type', 'type': str, 'default': 'mlp'},
-        {'name': 'model_layers', 'type': int, 'default': 16},
-        {'name': 'model_filters', 'type': int, 'default': 16},
+        {'name': 'model_layers', 'type': int, 'default': 2},
+        {'name': 'model_filters', 'type': int, 'default': 64},
         {'name': 'model_norm', 'type': str, 'default': None},
         {'name': 'model_dropout', 'type': float, 'default': 0},
-        {'name': 'model_activation', 'type': str, 'default': 'gelu'},
+        {'name': 'model_activation', 'type': str, 'default': 'kernel'}, # 'relu' 'gelu' 'kernel'
 
     ]
 

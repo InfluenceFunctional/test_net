@@ -4,7 +4,7 @@ metric:
         goal: "minimize"
 parameters:
         model_type:
-                values: ['mlp', 'transformer']
+                values: ['transformer']
         model_layers:
                 distribution: "int_uniform"
                 min: 1
@@ -12,7 +12,7 @@ parameters:
         model_filters:
                 distribution: "int_uniform"
                 min: 16
-                max: 256
+                max: 64
         model_dropout:
                 distribution: "uniform"
                 min: 0

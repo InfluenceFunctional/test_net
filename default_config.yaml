@@ -2,25 +2,27 @@ model_seed: 0
 dataset_seed: 0
 device: "cuda"
 run_num: 0
+data_source: 'gaussian_1'
 
+wandb: True
 sweep_config_file: "sweep_config.yaml"
-project_name: "my-test-net"
-experiment_tag: "test_sweep_1"
-sweep: True
+project_name: "gauss_net"
+experiment_tag: "gaussian_prep"
+sweep: False
 sweep_id: null
 sweep_num_runs: 50
 
 dataset_size: 1000
-dataset_dimension: 10
+dataset_dimension: 2
 
-batch_size: 1000
+batch_size: 10
 epochs: 1000
 history: 100
 learning_rate: 0.001
 
 model_type: mlp
-model_layers: 8
+model_layers: 2
 model_filters: 32
 model_norm: null
 model_dropout: 0.1
-model_activation: gelu
+model_activation: kernel
